@@ -1,1 +1,23 @@
-<p>login works!</p>
+<section>
+    <mat-card class="contenedor">
+        <div class="loginImagen">
+            <img src="./assets/loginImage.png" alt="Imagen ilustrativa">
+        </div>
+        <div class="loginFormulario">
+            <h1>Inicia tu sesión</h1>
+            <form [formGroup]="FormularioDeInicioDeSesion" (ngSubmit)="iniciarSesion()">
+                <mat-form-field appearance="outline">
+                    <mat-label>Correo electrónico</mat-label>
+                    <input type="email" matInput placeholder="ejemplo@correo.com" formControlName="correo">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Contraseña</mat-label>
+                    <input type="password" matInput placeholder="" formControlName="contrasenna">
+                </mat-form-field>
+                <div class="botonera">
+                    <button mat-flat-button type="submit" color="accent">Acceder</button>
+                </div>
+            </form>
+        </div>
+    </mat-card>
+</section>
