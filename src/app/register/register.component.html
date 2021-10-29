@@ -1,0 +1,27 @@
+<section>
+    <mat-card class="contenedor">
+        <div class="registerImagen">
+            <img src="./assets/registerImage.png" alt="Imagen ilustrativa">
+        </div>
+        <div class="registerFormulario">
+            <h1>Crea una cuenta</h1>
+            <form [formGroup]="FormularioDeRegistro" (ngSubmit)="registrar()">
+                <mat-form-field appearance="outline">
+                    <mat-label>Correo electrónico</mat-label>
+                    <input type="email" matInput placeholder="ejemplo@correo.com" formControlName="correo">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Contraseña</mat-label>
+                    <input type="password" matInput placeholder="" formControlName="contrasenna">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Confirma tu contraseña</mat-label>
+                    <input type="password" matInput placeholder="">
+                </mat-form-field>
+                <div class="botonera">
+                    <button type="submit" mat-flat-button color="accent">Crear</button>
+                </div>
+            </form>
+        </div>
+    </mat-card>
+</section>
