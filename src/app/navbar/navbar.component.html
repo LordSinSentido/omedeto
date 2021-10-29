@@ -1,3 +1,14 @@
-<mat-toolbar color="primary">
-    <span>Omedetо̄</span>
-  </mat-toolbar>
+<mat-toolbar>
+  <span [routerLink]="['/']" >Omedetо̄</span>
+  <span class="espaciador"></span>
+
+  <div *ngIf="datosDelUsuario | async as user; else login" >
+    <button (click)="cerrarSesion()" [routerLink]="['/']" mat-stroked-button>Cerrar sesión</button>
+    <button mat-stroked-button></button>
+  </div>
+
+  <ng-template #login>
+    <button [routerLink]="['/login']" mat-stroked-button>Iniciar sesión</button>
+    <button [routerLink]="['/register']" class="display: flex;" mat-flat-button color="accent">Registrate</button>
+  </ng-template>
+</mat-toolbar>
