@@ -14,15 +14,6 @@ export const environment = {
     measurementId: 'G-TYJR7YPF6H',
   },
   production: false,
-  firebaseConfig: {
-    apiKey: "AIzaSyCgif47XN7u6cmeoZOD5OWuAqnZRSCT9II",
-    authDomain: "omedeto-ids.firebaseapp.com",
-    projectId: "omedeto-ids",
-    storageBucket: "omedeto-ids.appspot.com",
-    messagingSenderId: "1049878364290",
-    appId: "1:1049878364290:web:40d20797d336671b9db49b",
-    measurementId: "G-TYJR7YPF6H"
-  }
 };
 
 /*
