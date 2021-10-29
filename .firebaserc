@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "omedeto-ids": {
+      "hosting": {
+        "omedeto": [
+          "omedeto-ids"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "omedeto-ids"
+  }
+}
