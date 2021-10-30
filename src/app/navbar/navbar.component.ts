@@ -8,8 +8,8 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  public datosDelUsuario: Observable<any> = this.ServicioDeAutenticacion.autenticacion.user;
-
+  public conexionDelUsuario: Observable<any> = this.ServicioDeAutenticacion.autenticacion.user;
+  
   constructor(private ServicioDeAutenticacion: AuthService) { }
 
   ngOnInit(): void {

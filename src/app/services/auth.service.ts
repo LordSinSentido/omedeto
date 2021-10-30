@@ -1,42 +1,43 @@
 import { Injectable } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
-  //public usuario: User | undefined;
+  
+  constructor(public autenticacion: AngularFireAuth, private redireccionar: Router, private snackbar: MatSnackBar) { }
 
-  constructor(public autenticacion: AngularFireAuth) { }
-
-  async iniciarSesion(correo: string, contrasenna: string) {
-    try{
-      return await this.autenticacion.signInWithEmailAndPassword(correo, contrasenna);
-    } catch(error){
-      return false;
-    }
+  iniciarSesion(correo: string, contrasenna: string) {
+    this.autenticacion.signInWithEmailAndPassword(correo, contrasenna).then(result => {
+      this.snackbar.open("Hola " + result.user?.email, "", {duration: 3000});
+      this.redireccionar.navigate(['/']);
+    }).catch(error => {
+      this.snackbar.open(error.message, "Aceptar", {duration: 7000});
+    });
   }
 
-  async registarUsuario(correo: string, contrasenna: string) {
-    try {
-      return await this.autenticacion.createUserWithEmailAndPassword(correo, contrasenna);
-    } catch (error) {
-      return console.log(error);
-    }
+  registarUsuario(correo: string, contrasenna: string) {
+    this.autenticacion.createUserWithEmailAndPassword(correo, contrasenna).then(usuario => {
+      this.snackbar.open("¡Listo!, ahora puedes iniciar sesión", "", {duration: 3000});
+      this.redireccionar.navigate(['/login']);
+      this.autenticacion.signOut();
+    }).catch(error => {
+      this.snackbar.open(error.message, "Aceptar", {duration: 7000});
+    });
   }
 
-  async comprobarEstado() {
-    try {
-      return await this.autenticacion.authState.pipe(first()).toPromise();
-    } catch (error) {
-      return console.log(error);
-    }
+  comprobarEstado() {
+    return this.autenticacion.currentUser;
   }
 
-  async cerrarSesion() {
-    try {
-      return await this.autenticacion.signOut();
-    } catch (error) {
-      return console.log(error);
-    }
+  cerrarSesion() {
+    this.autenticacion.signOut().then(() => {
+      this.snackbar.open("Cerraste sesión", "", {duration: 3000});
+      this.redireccionar.navigate(['/']);
+    }).catch(error => {
+      this.snackbar.open(error.message, "Aceptar", {duration: 7000});
+    });
   }
 }

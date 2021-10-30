@@ -20,19 +20,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  async iniciarSesion() {
-    try {
-      const {correo, contrasenna} = this.FormularioDeInicioDeSesion.value;
-      const seInicioSesion = await this.ServicioDeAutenticacion.iniciarSesion(correo, contrasenna);
-  
-      if (seInicioSesion) {
-        this.redireccionar.navigate(['/']);
-        this.snackbar.open("Sesión iniciada", "", {duration: 3000});
-      } else {
-        this.snackbar.open("No se pudo iniciar la sesión, revise su correo o contraseña e intentelo nuevamente", "Aceptar", {duration: 5000});
-      }
-    } catch (error: any) {
-      
-    }
+  iniciarSesion() {
+    const {correo, contrasenna} = this.FormularioDeInicioDeSesion.value;
+    this.ServicioDeAutenticacion.iniciarSesion(correo, contrasenna);
   }
 }

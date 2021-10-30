@@ -19,6 +19,7 @@
                     <input type="password" matInput placeholder="">
                 </mat-form-field>
                 <div class="botonera">
+                    <mat-spinner *ngIf="cargando" class="spinner"></mat-spinner>
                     <button type="submit" mat-flat-button color="accent">Crear</button>
                 </div>
             </form>

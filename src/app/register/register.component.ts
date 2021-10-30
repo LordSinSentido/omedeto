@@ -15,21 +15,16 @@ export class RegisterComponent implements OnInit {
     contrasenna: new FormControl('')
   });
 
+  cargando: boolean = false;
+
   constructor(private ServicioDeAutenticacion: AuthService, private redireccionar: Router) { }
 
   ngOnInit(): void {
   }
 
-  async registrar() {
-    try {
-      const {correo, contrasenna} = this.FormularioDeRegistro.value;
-      const seRegistro = await this.ServicioDeAutenticacion.registarUsuario(correo, contrasenna);
-
-      if(seRegistro) {
-        this.redireccionar.navigate(['/']);
-      }
-    } catch (error) {
-      
-    }
+  registrar() {
+    const {correo, contrasenna, nombre} = this.FormularioDeRegistro.value;
+    this.ServicioDeAutenticacion.registarUsuario(correo, contrasenna);
+    this.cargando = true;
   }
 }

@@ -2,9 +2,9 @@
   <span [routerLink]="['/']" >Omedetо̄</span>
   <span class="espaciador"></span>
 
-  <div *ngIf="datosDelUsuario | async as user; else login" >
+  <div *ngIf="conexionDelUsuario | async as user; else login" >
     <button (click)="cerrarSesion()" [routerLink]="['/']" mat-stroked-button>Cerrar sesión</button>
-    <button mat-stroked-button></button>
+    <button mat-stroked-button> {{user.email}} </button>
   </div>
 
   <ng-template #login>
