@@ -14,7 +14,7 @@ mat-form-field{
 
 .contenedor{
     width: 100%;
-    max-width: 720px;
+    max-width: 800px;
     margin: 5vh 1em;
 }
 
@@ -39,7 +39,7 @@ mat-form-field{
     margin-left: 0.5em;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 800px) {
     .contenedor{
         grid-template-columns: 1fr;
     }
