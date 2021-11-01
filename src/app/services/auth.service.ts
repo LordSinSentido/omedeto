@@ -29,7 +29,8 @@ export class AuthService {
   }
 
   comprobarEstado() {
-    return this.autenticacion.currentUser;
+    const usuario = this.autenticacion.currentUser;
+    return usuario;
   }
 
   cerrarSesion() {
