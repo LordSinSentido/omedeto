@@ -9,7 +9,9 @@ import { environment } from '../environments/environment';
 //Modulos Firebase
 import { AngularFireModule} from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AuthService } from './services/auth.service';
+import { FirestoreService } from './services/firestore.service';
 
 //Routing y componentes
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +20,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { PrincipalComponent } from './principal/principal.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { RecipeComponent } from './recipe/recipe.component';
 
 @NgModule({
   declarations: [
@@ -25,18 +28,20 @@ import { RegisterComponent } from './register/register.component';
     NavbarComponent,
     PrincipalComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    RecipeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFirestoreModule,
     AngularMaterialModule,
     BrowserAnimationsModule,
     ReactiveFormsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, FirestoreService],
   bootstrap: [AppComponent]
 })
 
