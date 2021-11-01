@@ -2,9 +2,25 @@
   <span [routerLink]="['/']" >Omedetо̄</span>
   <span class="espaciador"></span>
 
-  <div *ngIf="conexionDelUsuario | async as user; else login" >
-    <button (click)="cerrarSesion()" [routerLink]="['/']" mat-stroked-button>Cerrar sesión</button>
-    <button mat-stroked-button> {{user.email}} </button>
+  <div *ngIf="conexionDelUsuario | async as user; else login">
+    <button mat-stroked-button [matMenuTriggerFor]="menu"> {{user.email}} </button>
+
+    <mat-menu #menu="matMenu" xPosition="before">
+      <button mat-menu-item>
+        <mat-icon>article</mat-icon>
+        Mis recetas
+      </button>
+
+      <button mat-menu-item>
+        <mat-icon>account_circle</mat-icon>
+        Mi perfil
+      </button>
+
+      <button (click)="cerrarSesion()" [routerLink]="['/']" mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        Cerrar sesión
+      </button>
+    </mat-menu>
   </div>
 
   <ng-template #login>
