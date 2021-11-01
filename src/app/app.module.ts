@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 import { AngularFireModule} from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
 import { AuthService } from './services/auth.service';
 import { FirestoreService } from './services/firestore.service';
 
@@ -21,6 +22,7 @@ import { PrincipalComponent } from './principal/principal.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { RecipeComponent } from './recipe/recipe.component';
+import { StorageService } from './services/storage.service';
 
 @NgModule({
   declarations: [
@@ -37,11 +39,12 @@ import { RecipeComponent } from './recipe/recipe.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     AngularMaterialModule,
     BrowserAnimationsModule,
     ReactiveFormsModule
   ],
-  providers: [AuthService, FirestoreService],
+  providers: [AuthService, FirestoreService, {provide: BUCKET, useValue:'gs://omedeto-ids.appspot.com'}, StorageService],
   bootstrap: [AppComponent]
 })
 
