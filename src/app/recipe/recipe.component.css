@@ -1,0 +1,56 @@
+section{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+mat-form-field{
+    width: 100%;
+}
+
+.ingredientesBotonera > button{
+    margin-right: 1em;
+}
+
+.contenedor{
+    width: 100%;
+    max-width: 720px;
+    margin: 5vh 1em;
+}
+
+.datosTiempo{
+    display: grid;
+    grid-template-columns: min-content min-content;
+    gap: 1em;
+}
+
+.ingredientesCampos{
+    display: grid;
+    grid-template-columns: min-content auto;
+    gap: 1em;
+}
+
+.stepperBotonera{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.stepperBotonera > button{
+    margin-left: 0.5em;
+}
+
+@media (max-width: 720px) {
+    .contenedor{
+        grid-template-columns: 1fr;
+    }
+
+    .datosTiempo{
+        grid-template-columns: min-content;
+        gap: 0em;
+    }
+
+    .ingredientesCampos{
+        grid-template-columns: auto;
+        gap: 0px;
+    }
+}

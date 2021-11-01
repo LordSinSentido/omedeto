@@ -1,0 +1,132 @@
+<section>
+    <mat-card class="contenedor">
+        <div class="registerFormulario">
+            <h1>Crea una receta</h1>
+            <form [formGroup]="formularioDeReceta" autocomplete="off">
+                <mat-vertical-stepper linear>
+
+                    <mat-step label="Datos de la receta" completed=true>
+                        <h2>Cuéntanos acerca de tu nueva receta</h2>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Ponle nombre</mat-label>
+                            <input type="text" matInput placeholder="Ensalada de fusillis" formControlName="nombre">
+                        </mat-form-field>
+        
+                        <mat-form-field appearance="outline">
+                            <mat-label>Da una descripción del platillo</mat-label>
+                            <textarea matInput placeholder="Ensalada de lechuga, jitomate y zanahoria con fusillis recien hechos..." formControlName="descripcion"></textarea>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Dificultad de elaboración</mat-label>
+                            <mat-select [(value)]="dificultad" formControlName="dificultad">
+                                <mat-option value="0">Fácil</mat-option>
+                                <mat-option value="1">Medio</mat-option>
+                                <mat-option value="2">Difícil</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <p>Tiempo que se tarda en preparar el platillo</p>
+                        <div class="datosTiempo">
+
+                            <mat-form-field appearance="outline">
+                                <mat-label>Horas</mat-label>
+                                <mat-select [(value)]="horas" formControlName="tiempo">
+                                    <mat-option *ngFor="let hora of tiempoHoras; index as horaSeleccionada" [value]="horaSeleccionada">{{hora}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline">
+                                <mat-label>Minutos</mat-label>
+                                <mat-select [(value)]="minutos" formControlName="tiempo">
+                                    <mat-option *ngFor="let minuto of tiempoMinutos; index as minutosSeleccionados" [value]="minutosSeleccionados">{{minuto}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        
+
+                        <div class="stepperBotonera">
+                            <button matStepperNext mat-stroked-button color="primary">Continuar</button>
+                        </div>
+                    </mat-step>
+
+                    <mat-step label="Ingredientes que lleva" completed=true>
+                        <div class="ingredientes">
+                            <h2>Dinos qué ingredientes lleva</h2>
+                            <p>(Puedes agregar o quitar ingredientes con los botones de abajo)</p>
+        
+                            <div *ngFor="let i of ingredientes(numeroDeIngrediente)" class="ingredientesCampos">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Cantidad</mat-label>
+                                    <input type="text" matInput placeholder="Una pizca">
+                                </mat-form-field>
+        
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Ingrediente</mat-label>
+                                    <input type="text" matInput placeholder="Sal molida">
+                                </mat-form-field>
+                            </div>
+        
+                            <div class="ingredientesBotonera">
+                                <button (click)="eliminarIngrediente()" mat-stroked-button color="warn">
+                                    <mat-icon>remove</mat-icon>
+                                </button>
+            
+                                <button (click)="agregarIngrediente()" mat-stroked-button color="primary">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="stepperBotonera">
+                            <button matStepperPrevious mat-stroked-button>Regresar</button>
+                            <button matStepperNext mat-stroked-button color="primary">Continuar</button>
+                        </div>
+                    </mat-step>
+
+                    <mat-step label="Pasos a seguir" completed=true>
+                        <div class="pasos">
+                            <h2>Agrega los pasos necesarios su elaboración</h2>
+                            <p>(Puedes agregar o quitar pasos con los botones de abajo)</p>
+        
+                            <div *ngFor="let i of pasos(numeroDePasos); index as indice" class="pasosCampos">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Paso número {{indice + 1}}</mat-label>
+                                    <textarea matInput placeholder="A continuación, realizaremos lo siguiente..."></textarea>
+                                </mat-form-field>
+                            </div>
+        
+                            <div class="ingredientesBotonera">
+                                <button (click)="eliminarPaso()" mat-stroked-button color="warn">
+                                    <mat-icon>remove</mat-icon>
+                                </button>
+            
+                                <button (click)="agregarPaso()" mat-stroked-button color="primary">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="stepperBotonera">
+                            <button matStepperPrevious mat-stroked-button>Regresar</button>
+                            <button matStepperNext mat-stroked-button color="primary">Continuar</button>
+                        </div>
+                    </mat-step>
+
+                    <mat-step label="¿Todo listo?">
+                        <h2>¡Listo!</h2>
+                        <p>Para finalizar, presiona el botón de "Publicar", solo dale una revisada a todo para corroborar que la información de la receta está correcta</p>
+                        <div class="stepperBotonera">
+                            <!--mat-spinner class="spinner"></mat-spinner-->
+                            <button matStepperPrevious mat-stroked-button>Regresar</button>
+                            <button type="submit" (click)="guardarReceta()" mat-flat-button color="accent">Publicar</button>
+                        </div>
+                    </mat-step>
+
+                </mat-vertical-stepper>
+
+            </form>
+        </div>
+    </mat-card>
+</section>
