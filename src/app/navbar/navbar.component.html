@@ -3,7 +3,7 @@
   <span class="espaciador"></span>
 
   <div *ngIf="conexionDelUsuario | async as user; else login">
-    <button mat-stroked-button [matMenuTriggerFor]="menu"> {{user.email}} </button>
+    <button mat-stroked-button [matMenuTriggerFor]="menu"> {{user.displayName}} </button>
 
     <mat-menu #menu="matMenu" xPosition="before">
       <button mat-menu-item>
@@ -11,7 +11,7 @@
         Mis recetas
       </button>
 
-      <button mat-menu-item>
+      <button [routerLink]="['/profile']" mat-menu-item>
         <mat-icon>account_circle</mat-icon>
         Mi perfil
       </button>
