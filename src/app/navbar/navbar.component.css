@@ -2,6 +2,16 @@
     flex: 1 1 auto;
 }
 
+.logotipo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logotipo > img{
+    height: 2em;
+}
+
 mat-toolbar > button{
     margin-left: 1em;
 }

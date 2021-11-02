@@ -1,5 +1,7 @@
 <mat-toolbar>
-  <span [routerLink]="['/']" >Omedetо̄</span>
+  <span class="logotipo" [routerLink]="['/']" >
+    <img src="./assets/logotipo.png" alt="Omedeto">
+  </span>
   <span class="espaciador"></span>
 
   <div *ngIf="conexionDelUsuario | async as user; else login">
