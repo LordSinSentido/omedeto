@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, FormGroupName, Validators } from '@a
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { FirestoreService } from '../services/firestore.service';
 import { StorageService } from '../services/storage.service';
 
 @Component({
@@ -13,11 +14,9 @@ import { StorageService } from '../services/storage.service';
 
 
 export class RecipeComponent implements OnInit {
-
-
   conexionDelUsuario: Observable<any> = this.ServicioDeAutenticacion.autenticacion.user;
   formularioDeReceta = this.receta.group({
-    autor: ['', Validators.required],
+    autor: '',
     nombre: ['', Validators.required],
     descripcion: ['', Validators.required],
     dificultad: ['', Validators.required],
@@ -27,22 +26,18 @@ export class RecipeComponent implements OnInit {
     }),
     ingredientes: this.receta.array([]),
     pasos: this.receta.array([]),
-    fotos: ['']
+    fotos: ['', !Validators.required]
   });
 
-  
   usuario: any;
-  
   tiempoHoras: string[] = [];
-  tiempoMinutos: string[] = ['00', '15', '30', '15']
-  horas: number = -1;
-  minutos: number = -1;
-  dificultad: number = -1;
-  
+  tiempoMinutos: string[] = ['00', '15', '30', '45']
   fotoDeReceta: any;
   progresoDeCarga: number = 0;
 
-  constructor(private fb:FormBuilder, private receta: FormBuilder, private ServicioDeAutenticacion: AuthService, private ServicioDeAlmacenamiento: StorageService, private snackbar: MatSnackBar) {
+  procesando: boolean = false;
+
+  constructor(private ServicioDeBase: FirestoreService, private receta: FormBuilder, private ServicioDeAutenticacion: AuthService, private ServicioDeAlmacenamiento: StorageService, private snackbar: MatSnackBar) {
     this.conexionDelUsuario.subscribe(user => {
       this.usuario = user.uid;
     });
@@ -63,7 +58,7 @@ export class RecipeComponent implements OnInit {
   }
   
   agregarIngrediente() {
-    const ingredientesFormulario = this.fb.group({
+    const ingredientesFormulario = this.receta.group({
       cantidad: ['', Validators.required],
       ingrediente: ['', Validators.required]
     });
@@ -75,7 +70,7 @@ export class RecipeComponent implements OnInit {
   }
 
   agregarPaso() {
-    const pasosFormulario = this.fb.group({paso: ['', Validators.required]});
+    const pasosFormulario = this.receta.group({paso: ['', Validators.required]});
     this.pasos.push(pasosFormulario);
   }
 
@@ -87,42 +82,43 @@ export class RecipeComponent implements OnInit {
     this.fotoDeReceta = evento.target?.files[0];
   }
 
-
-
-
   guardarReceta() {
-    /*if(this.formularioDeReceta.invalid){
+    this.formularioDeReceta.value.autor = this.usuario;
+    this.procesando = true;
+
+    if(this.formularioDeReceta.invalid){
       this.snackbar.open("Faltan algunos datos", "Aceptar", {duration: 7000});
+      this.procesando = false;
       console.log(this.formularioDeReceta.value);
     }else{
-      this.snackbar.open("Listo", "", {duration: 3000});
-      console.log(this.formularioDeReceta.value);
-    }*/
-    const cargar = this.ServicioDeAlmacenamiento.cargarFotoDeReceta(this.fotoDeReceta, this.usuario);
-      cargar.on(
-        'state_changed',
-        snapshot => {
-          let progresoDeCarga = snapshot.bytesTransferred / snapshot.totalBytes * 100;
-          this.progresoDeCarga = progresoDeCarga;
-        },
-        error => {
-          this.snackbar.open(error.message, "Aceptar", {duration: 7000});
-        },
-        () => { /// <---- Hay que revisar esta parte, no está retornando la url de la imagen
-           cargar.snapshot.ref.getDownloadURL().then(url => {
-            this.formularioDeReceta.value.fotos = url
-            console.log(this.formularioDeReceta.value.fotos);
-          });
-          
-        }
-      );
+      this.ServicioDeBase.agregarReceta(this.formularioDeReceta.value).then(elemento => {
+        const cargar = this.ServicioDeAlmacenamiento.cargarFotoDeReceta(this.fotoDeReceta, elemento.id, this.usuario);
+        cargar.on(
+          'state_changed',
+          snapshot => {
+            let progresoDeCarga = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+            this.progresoDeCarga = progresoDeCarga;
+          },
+          error => {
+            this.snackbar.open(error.message, "Aceptar", {duration: 7000});
+            this.procesando = false;
+          },
+          () => {
+            cargar.snapshot.ref.getDownloadURL().then(url => {
+              this.formularioDeReceta.value.fotos = url;
+              this.ServicioDeBase.editarFoto(elemento.id, this.formularioDeReceta.value);
+              this.procesando = false;
+              this.snackbar.open("¡Listo!, tu receta ha sido publicada", "", {duration: 3000});
+            });
+          }
+        );
+      }).catch(error => {
+        this.snackbar.open(error.message, "", {duration: 3000});
+        this.procesando = false;
+      })
+    }
+    
 
       
-      
   }
-
-  mostarLog() {
-    console.log(this.formularioDeReceta.value);
-  }
-
 }

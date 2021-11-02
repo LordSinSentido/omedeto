@@ -14,8 +14,8 @@ export class StorageService {
     return subir;
   }
 
-  cargarFotoDeReceta(archivo: File, uid: string) {
-    const path = this.almacenamiento.storage.ref(`fotosDeReceta/${uid}`);
+  cargarFotoDeReceta(archivo: File, receta: string, uid: string) {
+    const path = this.almacenamiento.storage.ref(`fotosDeReceta/${uid}/${receta}`);
     const subir = path.put(archivo);
     return subir;
   }

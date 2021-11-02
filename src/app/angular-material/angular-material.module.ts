@@ -13,6 +13,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 @NgModule({
   declarations: [],
@@ -29,7 +31,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatSelectModule,
     MatDividerModule,
     MatStepperModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressBarModule
   ],
   exports: [
     CommonModule,
@@ -44,7 +47,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatSelectModule,
     MatDividerModule,
     MatStepperModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressBarModule
   ]
 })
 export class AngularMaterialModule { }
