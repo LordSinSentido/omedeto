@@ -14,19 +14,23 @@ mat-form-field{
     width: 100%;
 }
 
-.contenedor{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5em;
+.tarjeta{
     width: 100%;
     max-width: 800px;
     margin: 5vh 1em;
+}
+
+.contenedor{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
 }
 
 .profileImagen{
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    flex-direction: column;
 }
 
 .botonera{
@@ -36,8 +40,8 @@ mat-form-field{
 
 @media (max-width: 800px) {
     img{
-        max-height: 15em;
-        width: auto;
+        max-height: auto;
+        width: 100%;
     }
 
     .contenedor{

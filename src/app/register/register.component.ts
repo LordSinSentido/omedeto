@@ -46,7 +46,8 @@ export class RegisterComponent implements OnInit {
     this.ServicioDeAutenticacion.registarUsuario(this.formularioDeRegistro.value.correo, this.formularioDeRegistro.value.contrasenna).then(usuarioCreado => {
 
       // Carga de la imagen de perfil
-      this.ServicioDeAlmacenamiento.cargarFotoDePerfil(usuarioCreado.uid).put(this.fotoDePerfil).on(
+      const cargar = this.ServicioDeAlmacenamiento.cargarFotoDePerfil(this.fotoDePerfil, usuarioCreado.user.uid);
+      cargar.on(
         'state_changed',
         snapshot => {
           let progresoDeCarga = snapshot.bytesTransferred / snapshot.totalBytes * 100;
@@ -56,25 +57,22 @@ export class RegisterComponent implements OnInit {
           this.snackbar.open(error.message, "Aceptar", {duration: 7000});
         },
         () => { /// <---- Hay que revisar esta parte, no está retornando la url de la imagen
-          this.ServicioDeAlmacenamiento.cargarFotoDePerfil(usuarioCreado.uid).put(this.fotoDePerfil).snapshot.ref.getDownloadURL().then(url => {
+           cargar.snapshot.ref.getDownloadURL().then(url => {
             this.formularioDeRegistro.value.fotoUrl = url;
-          }).catch(error => {
-            console.log(error.message, 'Foto De Pefil');
-          })
+
+            usuarioCreado.user.updateProfile({
+              uid: this.formularioDeRegistro.value.nombreDelUsuario,
+              displayName: this.formularioDeRegistro.value.nombreDelUsuario,
+              photoURL: this.formularioDeRegistro.value.fotoUrl
+            });
+
+            this.snackbar.open("¡Listo!, ahora puedes iniciar sesión", "", {duration: 3000});
+            this.redireccionar.navigate(['/login']);
+            this.ServicioDeAutenticacion.cerrarSesion();
+
+           });
         }
       );
-
-
-      usuarioCreado.user.updateProfile({
-        uid: this.formularioDeRegistro.value.nombreDelUsuario,
-        displayName: this.formularioDeRegistro.value.nombreDelUsuario,
-        photoURL: this.formularioDeRegistro.value.fotoUrl
-      })
-
-      this.snackbar.open("¡Listo!, ahora puedes iniciar sesión", "", {duration: 3000});
-      this.redireccionar.navigate(['/login']);
-      this.ServicioDeAutenticacion.cerrarSesion();
-
     }).catch(error => {
       this.snackbar.open(error.message, "Aceptar", {duration: 7000});
     });
