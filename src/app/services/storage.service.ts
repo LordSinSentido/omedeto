@@ -8,8 +8,15 @@ export class StorageService {
 
   constructor(private almacenamiento: AngularFireStorage ) { }
   
-  cargarFotoDePerfil(uid: string) {
-    const path = `fotosDePefil/${uid}`;
-    return this.almacenamiento.storage.ref(path);
+  cargarFotoDePerfil(archivo: File, uid: string) {
+    const path = this.almacenamiento.storage.ref(`fotosDePerfil/${uid}`);
+    const subir = path.put(archivo);
+    return subir;
+  }
+
+  cargarFotoDeReceta(archivo: File, uid: string) {
+    const path = this.almacenamiento.storage.ref(`fotosDeReceta/${uid}`);
+    const subir = path.put(archivo);
+    return subir;
   }
 }

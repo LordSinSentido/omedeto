@@ -26,8 +26,18 @@ mat-form-field{
 
 .ingredientesCampos{
     display: grid;
-    grid-template-columns: min-content auto;
+    grid-template-columns: min-content auto min-content;
     gap: 1em;
+}
+
+.pasosCampos{
+    display: grid;
+    grid-template-columns: auto min-content;
+    gap: 1em;
+}
+
+.botoneraArray{
+    margin-bottom: 1em;
 }
 
 .stepperBotonera{
