@@ -22,9 +22,9 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Dificultad de elaboración</mat-label>
                             <mat-select formControlName="dificultad">
-                                <mat-option value="0">Fácil</mat-option>
-                                <mat-option value="1">Medio</mat-option>
-                                <mat-option value="2">Difícil</mat-option>
+                                <mat-option value="Fácil">Fácil</mat-option>
+                                <mat-option value="Medio">Medio</mat-option>
+                                <mat-option value="Difícil">Difícil</mat-option>
                             </mat-select>
                         </mat-form-field>
     
@@ -34,14 +34,14 @@
                             <mat-form-field appearance="outline">
                                 <mat-label>Horas</mat-label>
                                 <mat-select formControlName="horas">
-                                    <mat-option *ngFor="let hora of tiempoHoras; index as horaSeleccionada" [value]="horaSeleccionada">{{hora}}</mat-option>
+                                    <mat-option *ngFor="let hora of tiempoHoras" [value]="hora">{{hora}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
     
                             <mat-form-field appearance="outline">
                                 <mat-label>Minutos</mat-label>
                                 <mat-select formControlName="minutos">
-                                    <mat-option *ngFor="let minuto of tiempoMinutos; index as minutosSeleccionados" [value]="minutosSeleccionados">{{minuto}}</mat-option>
+                                    <mat-option *ngFor="let minuto of tiempoMinutos" [value]="minuto">{{minuto}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>

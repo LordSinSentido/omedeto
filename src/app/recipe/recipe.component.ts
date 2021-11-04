@@ -16,7 +16,8 @@ import { StorageService } from '../services/storage.service';
 export class RecipeComponent implements OnInit {
   conexionDelUsuario: Observable<any> = this.ServicioDeAutenticacion.autenticacion.user;
   formularioDeReceta = this.receta.group({
-    autor: '',
+    autorID: '',
+    autorNombre: '',
     nombre: ['', Validators.required],
     descripcion: ['', Validators.required],
     dificultad: ['', Validators.required],
@@ -26,10 +27,13 @@ export class RecipeComponent implements OnInit {
     }),
     ingredientes: this.receta.array([]),
     pasos: this.receta.array([]),
-    fotos: ['', !Validators.required]
+    fotos: ['', !Validators.required],
+    fechaDeCreacion: '',
+    fechaDeActualizacion: ''
   });
 
-  usuario: any;
+  usuarioID: any;
+  usuarioNombre: any;
   tiempoHoras: string[] = [];
   tiempoMinutos: string[] = ['00', '15', '30', '45']
   fotoDeReceta: any;
@@ -39,7 +43,8 @@ export class RecipeComponent implements OnInit {
 
   constructor(private ServicioDeBase: FirestoreService, private receta: FormBuilder, private ServicioDeAutenticacion: AuthService, private ServicioDeAlmacenamiento: StorageService, private snackbar: MatSnackBar) {
     this.conexionDelUsuario.subscribe(user => {
-      this.usuario = user.uid;
+      this.usuarioID = user.uid;
+      this.usuarioNombre = user.displayName;
     });
   }
 
@@ -83,7 +88,11 @@ export class RecipeComponent implements OnInit {
   }
 
   guardarReceta() {
-    this.formularioDeReceta.value.autor = this.usuario;
+    this.formularioDeReceta.value.autorID = this.usuarioID;
+    this.formularioDeReceta.value.autorNombre = this.usuarioNombre;
+    this.formularioDeReceta.value.fechaDeCreacion = new Date();
+    this.formularioDeReceta.value.fechaDeActualizacion = this.formularioDeReceta.value.fechaDeCreacion;
+
     this.procesando = true;
 
     if(this.formularioDeReceta.invalid){
@@ -92,7 +101,7 @@ export class RecipeComponent implements OnInit {
       console.log(this.formularioDeReceta.value);
     }else{
       this.ServicioDeBase.agregarReceta(this.formularioDeReceta.value).then(elemento => {
-        const cargar = this.ServicioDeAlmacenamiento.cargarFotoDeReceta(this.fotoDeReceta, elemento.id, this.usuario);
+        const cargar = this.ServicioDeAlmacenamiento.cargarFotoDeReceta(this.fotoDeReceta, elemento.id, this.usuarioID);
         cargar.on(
           'state_changed',
           snapshot => {
