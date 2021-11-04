@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FirestoreService } from '../services/firestore.service';
 
 @Component({
   selector: 'app-principal',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./principal.component.css']
 })
 export class PrincipalComponent implements OnInit {
+  recetas: any[] = [];
 
-  constructor() { }
+  constructor(private ServicioDeFirestore: FirestoreService) { }
 
   ngOnInit(): void {
+    this.ServicioDeFirestore.obtenerTodasLasRecetas().subscribe(datos => {      
+      this.recetas = [];
+      datos.forEach((receta: any) => {
+        this.recetas.push({
+          id: receta.payload.doc.id,
+          ...receta.payload.doc.data()
+        });
+      });
+    });
   }
 
 }

@@ -1,11 +1,24 @@
-<mat-card style="max-width: 30em; margin: 1em;">
-    <mat-card-title>
-        Tarjeta de prueba
-    </mat-card-title>
-    <mat-card-subtitle>
-        Para ver si funciona Angular Material
-    </mat-card-subtitle>
-    <mat-card-content>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem dicta quidem mollitia ullam quam sed. Facere cumque, dolor magnam distinctio repellat minima quaerat quo quisquam. Qui doloribus totam non iure?
-    </mat-card-content>
-</mat-card>
+<section class="layer">
+    <div class="grid">
+        <mat-card [routerLink]="['/recipeView/', receta.id]" *ngFor="let receta of recetas; let i = index">
+            <mat-card-header>
+                <mat-card-title>
+                    <p>
+                        {{recetas[i].nombre}}
+                    </p>
+                </mat-card-title>
+                <mat-card-subtitle>
+                    <p>
+                        Por {{recetas[i].autorNombre}}
+                    </p>
+                </mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="{{recetas[i].fotos}}" alt="Foto de la receta de {{recetas[i].nombre}}">
+            <mat-card-content>
+                <p>
+                    {{recetas[i].descripcion}}
+                </p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</section>
