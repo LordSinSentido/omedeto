@@ -1,0 +1,33 @@
+<mat-progress-bar *ngIf="!progreso" mode="indeterminate"></mat-progress-bar>
+
+<section *ngIf="progreso">
+    <mat-card class="contenedor">
+        <mat-card-header>
+            <mat-card-title>{{receta[0].nombre}}</mat-card-title>
+            <mat-card-subtitle>Por {{receta[0].autorNombre}}, el {{fecha}}.</mat-card-subtitle>
+        </mat-card-header>
+
+        <img mat-card-image src="{{receta[0].fotos}}" alt="">
+
+        <mat-card-content>
+            <h2>Descripción</h2>
+            <p>{{receta[0].descripcion}}</p>
+            <div class="datosRecetas">
+                <p><b>Nivel de dificultad:</b> {{receta[0].dificultad}}</p>
+                <p><b>Tiempo de realización:</b> {{receta[0].tiempo.horas}}:{{receta[0].tiempo.minutos}} horas</p>
+            </div>
+
+            <h2>Ingredientes</h2>
+            <div *ngFor="let ingrediente of receta[0].ingredientes">
+                <p>{{ingrediente.cantidad}} - {{ingrediente.ingrediente}}</p>
+            </div>
+
+            <h2>Pasos de elaboración</h2>
+            <ol>
+                <li *ngFor="let paso of receta[0].pasos; let i = index">
+                    <p>{{paso.paso}}</p>
+                </li>
+            </ol>
+        </mat-card-content>
+    </mat-card>
+</section>

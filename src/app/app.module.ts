@@ -24,6 +24,7 @@ import { RegisterComponent } from './register/register.component';
 import { RecipeComponent } from './recipe/recipe.component';
 import { StorageService } from './services/storage.service';
 import { ProfileComponent } from './profile/profile.component';
+import { RecipeViewComponent } from './recipe-view/recipe-view.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ProfileComponent } from './profile/profile.component';
     LoginComponent,
     RegisterComponent,
     RecipeComponent,
-    ProfileComponent
+    ProfileComponent,
+    RecipeViewComponent
   ],
   imports: [
     BrowserModule,
