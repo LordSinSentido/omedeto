@@ -14,6 +14,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatDividerModule,
     MatStepperModule,
     MatMenuModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatListModule
   ],
   exports: [
     CommonModule,
@@ -48,7 +50,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatDividerModule,
     MatStepperModule,
     MatMenuModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatListModule
   ]
 })
 export class AngularMaterialModule { }
