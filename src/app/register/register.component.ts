@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { StorageService } from '../services/storage.service';
@@ -13,14 +12,14 @@ import { AuthService } from './../services/auth.service';
 })
 export class RegisterComponent implements OnInit {
   formularioDeRegistro: FormGroup;
-  cargando: boolean = false;
+  procesando: boolean = false;
   fotoDePerfil: any;
   progresoDeCarga: number = 0;
 
   constructor(private ServicioDeAutenticacion: AuthService, private ServicioDeAlmacenamiento: StorageService, private datosDelUsuario: FormBuilder, private redireccionar: Router, private snackbar: MatSnackBar) {
     this.formularioDeRegistro = this.datosDelUsuario.group({
       nombreDelUsuario: ['', Validators.required],
-      correo: ['', Validators.email],
+      correo: ['', [Validators.email, Validators.required]],
       contrasenna: ['', Validators.required],
       confirmacionContrasenna: ['', Validators.required],
       fotoUrl: ['']
@@ -36,16 +35,15 @@ export class RegisterComponent implements OnInit {
 
   registrar() {
 
-    // Comprueba las contrasennas
+    this.procesando = true;
+
     if(this.formularioDeRegistro.value.contrasenna != this.formularioDeRegistro.value.confirmacionContrasenna) {
+      this.procesando = false;
       this.snackbar.open("Las contraseñas no coinciden, revisalas", "Aceptar", {duration: 7000});
       return
     }
 
-    // Genera el usuario en Firebase
     this.ServicioDeAutenticacion.registarUsuario(this.formularioDeRegistro.value.correo, this.formularioDeRegistro.value.contrasenna).then(usuarioCreado => {
-
-      // Carga de la imagen de perfil
       const cargar = this.ServicioDeAlmacenamiento.cargarFotoDePerfil(this.fotoDePerfil, usuarioCreado.user.uid);
       cargar.on(
         'state_changed',
@@ -54,9 +52,10 @@ export class RegisterComponent implements OnInit {
           this.progresoDeCarga = progresoDeCarga;
         },
         error => {
+          this.procesando = false;
           this.snackbar.open(error.message, "Aceptar", {duration: 7000});
         },
-        () => { /// <---- Hay que revisar esta parte, no está retornando la url de la imagen
+        () => {
            cargar.snapshot.ref.getDownloadURL().then(url => {
             this.formularioDeRegistro.value.fotoUrl = url;
 
@@ -66,14 +65,15 @@ export class RegisterComponent implements OnInit {
               photoURL: this.formularioDeRegistro.value.fotoUrl
             });
 
-            this.snackbar.open("¡Listo!, ahora puedes iniciar sesión", "", {duration: 3000});
+            this.snackbar.open("¡Listo!, ahora puedes iniciar sesión", "Aceptar", {duration: 7000});
             this.redireccionar.navigate(['/login']);
             this.ServicioDeAutenticacion.cerrarSesion();
-
+            this.procesando = false;
            });
         }
       );
     }).catch(error => {
+      this.procesando = false;
       this.snackbar.open(error.message, "Aceptar", {duration: 7000});
     });
   }
