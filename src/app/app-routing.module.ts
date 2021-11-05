@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { PrincipalComponent } from './principal/principal.component';
+import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RecipeViewComponent } from './recipe-view/recipe-view.component';
 import { RecipeComponent } from './recipe/recipe.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
+  {path: 'profileEdit', component: ProfileEditComponent},
   {path: 'recipe', component: RecipeComponent},
   {path: 'recipeView/:id', component: RecipeViewComponent},
   {path: '**', redirectTo: 'principal', pathMatch: 'full'}
