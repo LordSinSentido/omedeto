@@ -1,7 +1,7 @@
 section{
     display: flex;
     justify-content: center;
-    width: 100%;
+    width: 100vw;
 }
 
 img{
@@ -12,13 +12,20 @@ mat-form-field{
     width: 100%;
 }
 
+mat-card{
+    margin: 2em 1em;
+    width: 100%;
+    max-width: 800px;
+}
+
+mat-spinner{
+    margin-right: 1em;
+}
+
 .contenedor{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.5em;
-    width: 100%;
-    max-width: 800px;
-    margin: 5vh 1em;
 }
 
 .registerImagen{

@@ -1,11 +1,16 @@
+section{
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    
+}
+
 mat-card{
     cursor: pointer;
 }
 
-.layer{
-    display: flex;
-    justify-content: center;
-    padding: 0em 1em;
+img{
+    height: 20em;
 }
 
 .grid{
@@ -14,15 +19,48 @@ mat-card{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1em;
+    padding-bottom: 2em;
+    margin: 2em 1em;
+}
+
+.tarjeta{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tarjeta:hover{
+    box-shadow: 0em 0em 1em 0.3em rgba(50,50,50,0.4);
+}
+
+.imagen{
+    overflow: hidden;
+    height: 20em;
+    align-self: flex-end;
+}
+
+.imagen > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
 }
 
 @media (max-width: 1080px) {
+    section{
+        display: unset;
+    }
+
     .grid{
         grid-template-columns: 1fr 1fr;
     }
 }
 
 @media (max-width: 720px) {
+    section{
+        display: unset;
+    }
+
     .grid{
         grid-template-columns: 1fr;
     }

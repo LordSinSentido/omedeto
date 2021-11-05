@@ -1,21 +1,26 @@
 section{
     display: flex;
     justify-content: center;
-    width: 100%;
+    width: 100vw;
+    margin-bottom: 2em;
+}
+
+mat-card{
+    margin: 2em 1em;
+    width: auto;
+    max-width: 800px;
 }
 
 mat-form-field{
     width: 100%;
 }
 
-.ingredientesBotonera > button{
+mat-spinner{
     margin-right: 1em;
 }
 
-.contenedor{
-    width: 100%;
-    max-width: 800px;
-    margin: 2em 1em;
+.ingredientesBotonera > button{
+    margin-right: 1em;
 }
 
 .datosTiempo{
@@ -50,8 +55,8 @@ mat-form-field{
 }
 
 @media (max-width: 800px) {
-    .contenedor{
-        grid-template-columns: 1fr;
+    section{
+        display: flow-root;
     }
 
     .datosTiempo{

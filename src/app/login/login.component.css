@@ -1,9 +1,7 @@
 section{
     display: flex;
     justify-content: center;
-    /*align-items: center;*/
-    width: 100%;
-    /*height: 100%;*/
+    width: 100vw;
 }
 
 img{
@@ -14,13 +12,13 @@ mat-form-field{
     width: 100%;
 }
 
-.contenedor{
+mat-card{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.5em;
+    gap: 1em;
     width: 100%;
     max-width: 800px;
-    margin: 5vh 1em;
+    margin: 2em 1em;
 }
 
 .loginImagen{
@@ -40,7 +38,7 @@ mat-form-field{
         width: auto;
     }
 
-    .contenedor{
+    mat-card{
         grid-template-columns: 1fr;
     }
 }
