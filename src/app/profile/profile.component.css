@@ -1,50 +1,102 @@
 section{
-    display: flex;
-    justify-content: center;
-    /*align-items: center;*/
-    width: 100%;
-    /*height: 100%;*/
+    padding: 2em 1em;
 }
 
-img{
-    width: 100%;
+mat-card{
+    cursor: pointer;
 }
 
-mat-form-field{
-    width: 100%;
-}
-
-.tarjeta{
-    width: 100%;
-    max-width: 800px;
-    margin: 5vh 1em;
-}
-
-.contenedor{
+.gridPersonal{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto;
+    justify-content: center;
+    justify-items: center;
     gap: 1em;
 }
 
-.profileImagen{
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
+.fotoDePerfil{
+    border: 0.5em solid rgb(0,87,97);
+    width: 15em;
+    height: 15em;
+    overflow: hidden;
+    border-radius: 100%;
 }
 
-.botonera{
+.fotoDePerfil > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.informacion{
+    text-align: center;
+}
+
+.informacion > button {
+    margin: 0em 0.5em;
+}
+
+.nombreDelUsuario{
+    font-size: 1.5em;
+}
+
+.recetas{
     display: flex;
+    justify-content: center;
+    padding: 0em 1em 5em 1em;
+}
+.noHayRecetas{
+    text-align: center;
+}
+
+.grid{
+    max-width: 1080px;
+    margin-top: 2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1em;
+    padding-bottom: 2em;
+}
+
+.tarjeta{
+    display: flex;
+    flex-direction: column;
     justify-content: flex-end;
 }
 
-@media (max-width: 800px) {
-    img{
-        max-height: auto;
-        width: 100%;
-    }
+.tarjeta > div{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
-    .contenedor{
+.tarjeta:hover{
+    box-shadow: 0em 0em 1em 0.3em rgba(50,50,50,0.4);
+}
+
+.imagen{
+    overflow: hidden;
+    height: 20em;
+    align-self: flex-end;
+}
+
+.imagen > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+@media (max-width: 1080px) {
+    .grid{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 720px) {
+    .grid{
         grid-template-columns: 1fr;
     }
 }
