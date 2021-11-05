@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormGroupName, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { FirestoreService } from '../services/firestore.service';
@@ -41,7 +42,7 @@ export class RecipeComponent implements OnInit {
 
   procesando: boolean = false;
 
-  constructor(private ServicioDeBase: FirestoreService, private receta: FormBuilder, private ServicioDeAutenticacion: AuthService, private ServicioDeAlmacenamiento: StorageService, private snackbar: MatSnackBar) {
+  constructor(private ServicioDeBase: FirestoreService, private receta: FormBuilder, private ServicioDeAutenticacion: AuthService, private ServicioDeAlmacenamiento: StorageService, private snackbar: MatSnackBar, private redireccionar: Router) {
     this.conexionDelUsuario.subscribe(user => {
       this.usuarioID = user.uid;
       this.usuarioNombre = user.displayName;
@@ -118,6 +119,7 @@ export class RecipeComponent implements OnInit {
               this.ServicioDeBase.editarFoto(elemento.id, this.formularioDeReceta.value);
               this.procesando = false;
               this.snackbar.open("¡Listo!, tu receta ha sido publicada", "", {duration: 3000});
+              this.redireccionar.navigate(['/recipeView/', elemento.id]);
             });
           }
         );

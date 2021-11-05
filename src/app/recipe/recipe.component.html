@@ -16,7 +16,7 @@
         
                         <mat-form-field appearance="outline">
                             <mat-label>Da una descripción del platillo</mat-label>
-                            <textarea matInput placeholder="Ensalada de lechuga, jitomate y zanahoria con fusillis recien hechos..." formControlName="descripcion"></textarea>
+                            <textarea rows="12" matInput placeholder="Ensalada de lechuga, jitomate y zanahoria con fusillis recien hechos..." formControlName="descripcion"></textarea>
                         </mat-form-field>
     
                         <mat-form-field appearance="outline">
@@ -96,8 +96,8 @@
                             <ng-container *ngFor="let paso of pasos.controls; let j = index">
                                 <div class="pasosCampos" [formGroupName]="j">
                                     <mat-form-field appearance="outline">
-                                        <mat-label>Paso número</mat-label>
-                                        <textarea matInput placeholder="A continuación, realizaremos lo siguiente..." formControlName="paso"></textarea>
+                                        <mat-label>Paso número {{j + 1}}</mat-label>
+                                        <textarea rows="12" matInput placeholder="A continuación, realizaremos lo siguiente..." formControlName="paso"></textarea>
                                     </mat-form-field>
 
                                     <button mat-icon-button (click)="eliminarPaso(j)">
@@ -134,7 +134,7 @@
                         <h2>¿Todo listo?</h2>
                         <p>Solo dale una revisada a todo, si está bien presiona el botón "Publicar" para terminar</p>
                         <div class="stepperBotonera">
-                            <mat-progress-spinner *ngIf="procesando" class="example-margin" color="primary" diameter="30" mode="indeterminate"> </mat-progress-spinner>
+                            <mat-progress-spinner *ngIf="procesando" color="primary" diameter="30" mode="indeterminate"> </mat-progress-spinner>
                             <button matStepperPrevious mat-stroked-button>Regresar</button>
                             <button type="submit" (click)="guardarReceta()" mat-flat-button color="accent">Publicar</button>
                         </div>
