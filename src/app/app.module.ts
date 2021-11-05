@@ -25,6 +25,8 @@ import { RecipeComponent } from './recipe/recipe.component';
 import { StorageService } from './services/storage.service';
 import { ProfileComponent } from './profile/profile.component';
 import { RecipeViewComponent } from './recipe-view/recipe-view.component';
+import { DeleteRecipeComponent } from './dialog/delete-recipe/delete-recipe.component';
+import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 
 @NgModule({
   declarations: [
@@ -35,8 +37,11 @@ import { RecipeViewComponent } from './recipe-view/recipe-view.component';
     RegisterComponent,
     RecipeComponent,
     ProfileComponent,
-    RecipeViewComponent
+    RecipeViewComponent,
+    DeleteRecipeComponent,
+    ProfileEditComponent
   ],
+  entryComponents: [DeleteRecipeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
