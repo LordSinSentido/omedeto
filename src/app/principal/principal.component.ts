@@ -8,6 +8,7 @@ import { FirestoreService } from '../services/firestore.service';
 })
 export class PrincipalComponent implements OnInit {
   recetas: any[] = [];
+  procesando: boolean = true;
 
   constructor(private ServicioDeFirestore: FirestoreService) { }
 
@@ -20,6 +21,8 @@ export class PrincipalComponent implements OnInit {
           ...receta.payload.doc.data()
         });
       });
+
+      this.procesando = false;
     });
   }
 

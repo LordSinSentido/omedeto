@@ -1,6 +1,8 @@
+<mat-progress-bar *ngIf="procesando" mode="indeterminate"></mat-progress-bar>
+
 <section class="layer">
     <div class="grid">
-        <mat-card [routerLink]="['/recipeView/', receta.id]" *ngFor="let receta of recetas; let i = index">
+        <mat-card class="tarjeta" [routerLink]="['/recipeView/', receta.id]" *ngFor="let receta of recetas; let i = index">
             <mat-card-header>
                 <mat-card-title>
                     <p>
@@ -13,12 +15,10 @@
                     </p>
                 </mat-card-subtitle>
             </mat-card-header>
-            <img mat-card-image src="{{recetas[i].fotos}}" alt="Foto de la receta de {{recetas[i].nombre}}">
-            <mat-card-content>
-                <p>
-                    {{recetas[i].descripcion}}
-                </p>
-            </mat-card-content>
+            <div class="imagen" mat-card-image>
+                <img src="{{recetas[i].fotos}}" alt="Foto de la receta {{recetas[i].nombre}}">
+            </div>
+            
         </mat-card>
     </div>
 </section>
