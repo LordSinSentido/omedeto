@@ -8,9 +8,9 @@
     <button mat-stroked-button [matMenuTriggerFor]="menu"> {{user.displayName}} </button>
 
     <mat-menu #menu="matMenu" xPosition="before">
-      <button mat-menu-item>
-        <mat-icon>article</mat-icon>
-        Mis recetas
+      <button [routerLink]="['/recipe']" mat-menu-item>
+        <mat-icon>post_add</mat-icon>
+        Crear nueva receta
       </button>
 
       <button [routerLink]="['/profile']" mat-menu-item>
