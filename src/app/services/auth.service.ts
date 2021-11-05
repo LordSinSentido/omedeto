@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { getAuth, updateProfile } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
@@ -11,7 +12,7 @@ export class AuthService {
 
   iniciarSesion(correo: string, contrasenna: string) {
     this.autenticacion.signInWithEmailAndPassword(correo, contrasenna).then(result => {
-      this.snackbar.open("Hola " + result.user?.email, "", {duration: 3000});
+      this.snackbar.open("Hola " + result.user?.displayName, "", {duration: 3000});
       this.redireccionar.navigate(['/']);
     }).catch(error => {
       this.snackbar.open(error.message, "Aceptar", {duration: 7000});
@@ -20,29 +21,37 @@ export class AuthService {
 
   registarUsuario(correo: string, contrasenna: string): Promise<any> {
     return this.autenticacion.createUserWithEmailAndPassword(correo, contrasenna);
-    /*
-    this.autenticacion.createUserWithEmailAndPassword(correo, contrasenna).then(usuario => {
-      this.snackbar.open("¡Listo!, ahora puedes iniciar sesión", "", {duration: 3000});
-      this.redireccionar.navigate(['/login']);
-      this.autenticacion.signOut();
-    }).catch(error => {
-      this.snackbar.open(error.message, "Aceptar", {duration: 7000});
-    });*/
   }
 
-  comprobarEstado() {
-    return this.autenticacion.currentUser;
+  obtenerUsuario(){
+    return getAuth().currentUser;
+  }
+
+  actualizarNombre(nombreUsuario: string) {
+    const usuario = this.obtenerUsuario();
+    if(usuario){
+      updateProfile(usuario, {
+        displayName: nombreUsuario
+      });
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  actualizarFoto(url: string){
+    const usuario = this.obtenerUsuario();
+    if(usuario){
+      updateProfile(usuario, {
+        photoURL: url
+      });
+      return true;
+    }else{
+      return false;
+    }
   }
 
   cerrarSesion(): Promise<any> {
     return this.autenticacion.signOut();
-    /*
-    this.autenticacion.signOut().then(() => {
-      this.snackbar.open("Cerraste sesión", "", {duration: 3000});
-      this.redireccionar.navigate(['/']);
-    }).catch(error => {
-      this.snackbar.open(error.message, "Aceptar", {duration: 7000});
-    });*/
-    
   }
 }
