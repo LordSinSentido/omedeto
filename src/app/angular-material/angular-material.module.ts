@@ -15,6 +15,10 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatListModule} from '@angular/material/list';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 
 @NgModule({
@@ -34,7 +38,10 @@ import {MatListModule} from '@angular/material/list';
     MatStepperModule,
     MatMenuModule,
     MatProgressBarModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatCheckboxModule
   ],
   exports: [
     CommonModule,
@@ -51,7 +58,10 @@ import {MatListModule} from '@angular/material/list';
     MatStepperModule,
     MatMenuModule,
     MatProgressBarModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatCheckboxModule
   ]
 })
 export class AngularMaterialModule { }
