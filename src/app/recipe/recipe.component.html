@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="stepperBotonera">
-                            <button matStepperNext mat-stroked-button color="primary">Continuar</button>
+                            <button matStepperNext mat-flat-button color="accent">Continuar</button>
                         </div>
                     </mat-step>
     
@@ -83,7 +83,7 @@
                         
                         <div class="stepperBotonera">
                             <button matStepperPrevious mat-stroked-button>Regresar</button>
-                            <button matStepperNext mat-stroked-button color="primary">Continuar</button>
+                            <button color="accent" matStepperNext mat-flat-button color="accent">Continuar</button>
                         </div>
                     </mat-step>
 
@@ -114,7 +114,7 @@
                         
                         <div class="stepperBotonera">
                             <button matStepperPrevious mat-stroked-button>Regresar</button>
-                            <button matStepperNext mat-stroked-button color="primary">Continuar</button>
+                            <button matStepperNext mat-flat-button color="accent">Continuar</button>
                         </div>
                     </mat-step>
     <!-- Paso 4 -->
@@ -125,7 +125,7 @@
 
                         <div class="stepperBotonera">
                             <button matStepperPrevious mat-stroked-button>Regresar</button>
-                            <button matStepperNext mat-stroked-button color="primary">Continuar</button>
+                            <button matStepperNext mat-flat-button color="accent">Continuar</button>
                         </div>
                         
                     </mat-step>
@@ -134,7 +134,7 @@
                         <h2>¿Todo listo?</h2>
                         <p>Solo dale una revisada a todo, si está bien presiona el botón "Publicar" para terminar</p>
                         <div class="stepperBotonera">
-                            <mat-progress-spinner *ngIf="procesando" color="primary" diameter="30" mode="indeterminate"> </mat-progress-spinner>
+                            <mat-progress-spinner *ngIf="procesando" color="accent" diameter="30" mode="indeterminate"> </mat-progress-spinner>
                             <button matStepperPrevious mat-stroked-button>Regresar</button>
                             <button type="submit" (click)="guardarReceta()" mat-flat-button color="accent">Publicar</button>
                         </div>

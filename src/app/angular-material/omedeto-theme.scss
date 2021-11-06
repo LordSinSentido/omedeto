@@ -11,7 +11,7 @@ $omedeto-primary: (
 );
 
 $omedeto-accent: (
- normal: #6fcb9d,
+ normal: #7fd7ec,
  contrast: (
    normal: rgba(black, 0.8),
  )
@@ -24,17 +24,26 @@ $omedeto-warn: (
  )
 );
 
+$omedeto-extra: (
+ normal: #cbb656,
+ contrast: (
+   normal: rgba(white, 0.8),
+ )
+);
+
 // Paletas
 
 $omedeto-primary-palette: mat.define-palette($omedeto-primary, normal);
 $omedeto-accent-palette: mat.define-palette($omedeto-accent, normal);
 $omedeto-warn-palette: mat.define-palette($omedeto-warn, normal);
+$omedeto-extra-palette: mat.define-palette($omedeto-extra, normal);
 
 $my-theme: mat.define-light-theme((
  color: (
    primary: $omedeto-primary-palette,
    accent: $omedeto-accent-palette,
    warn: $omedeto-warn-palette,
+   extra: $omedeto-extra-palette,
  )
 ));
 
