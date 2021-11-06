@@ -138,7 +138,7 @@
                             <button matStepperPrevious mat-stroked-button>Regresar</button>
                             <button type="submit" (click)="guardarReceta()" mat-flat-button color="accent">Publicar</button>
                         </div>
-                        <mat-progress-bar *ngIf="procesando" style="margin-top: 1em;" mode="determinate" [value]="progresoDeCarga"></mat-progress-bar>
+                        <mat-progress-bar color="accent" *ngIf="procesando" style="margin-top: 1em;" mode="determinate" [value]="progresoDeCarga"></mat-progress-bar>
                     </mat-step>
                 </mat-vertical-stepper>
             </form>

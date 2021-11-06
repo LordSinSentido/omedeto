@@ -1,4 +1,4 @@
-<mat-progress-bar *ngIf="procesando" mode="indeterminate"></mat-progress-bar>
+<mat-progress-bar color="accent" *ngIf="procesando" mode="indeterminate"></mat-progress-bar>
 
 <section class="personal" *ngIf="!procesando">
     <div class="gridPersonal">
@@ -20,29 +20,32 @@
         <p>¿Qué te parece si te llevamos al lugar donde podrás realizar tu primera contribución?</p>
         <button [routerLink]="['/recipe']" mat-flat-button color="primary">¡Sí! Llevame allí</button>
     </div>
-    <div *ngIf="hayRecetas" class="grid">
-        <mat-card class="tarjeta" *ngFor="let receta of recetas; let i = index">
-            <div [routerLink]="['/recipeView/', receta.id]">
-                <mat-card-header>
-                    <mat-card-title>
-                        <p>
-                            {{recetas[i].nombre}}
-                        </p>
-                    </mat-card-title>
-                    <mat-card-subtitle>
-                        <p>
-                            Por {{recetas[i].autorNombre}}
-                        </p>
-                    </mat-card-subtitle>
-                </mat-card-header>
-                <div class="imagen" mat-card-image>
-                    <img src="{{recetas[i].fotos}}" alt="Foto de la receta {{recetas[i].nombre}}">
+    <div *ngIf="hayRecetas">
+        <h1>Tus recetas</h1>
+        <div class="grid">
+            <mat-card class="tarjeta" *ngFor="let receta of recetas; let i = index">
+                <div [routerLink]="['/recipeView/', receta.id]">
+                    <mat-card-header>
+                        <mat-card-title>
+                            <p>
+                                {{recetas[i].nombre}}
+                            </p>
+                        </mat-card-title>
+                        <mat-card-subtitle>
+                            <p>
+                                Por {{recetas[i].autorNombre}}
+                            </p>
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <div class="imagen" mat-card-image>
+                        <img src="{{recetas[i].fotos}}" alt="Foto de la receta {{recetas[i].nombre}}">
+                    </div>
                 </div>
-            </div>
-            <mat-card-actions>
-                <button mat-stroked-button color="warn" (click)="confirmarBorrado(recetas[i].id)">Eliminar</button>
-                <button mat-stroked-button>Editar receta</button>
-            </mat-card-actions>
-        </mat-card>
+                <mat-card-actions>
+                    <button mat-stroked-button color="warn" (click)="confirmarBorrado(recetas[i].id)">Eliminar</button>
+                    <button mat-stroked-button>Editar receta</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
     </div>
 </section>

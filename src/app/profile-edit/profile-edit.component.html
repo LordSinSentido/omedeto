@@ -19,7 +19,7 @@
                         </mat-form-field>
         
                         <div class="botonera">
-                            <mat-spinner *ngIf="procesando" diameter="30" class="spinner"></mat-spinner>
+                            <mat-spinner color="accent" *ngIf="procesando" diameter="30" class="spinner"></mat-spinner>
                             <button type="submit" [disabled]="seCambioNombre" mat-flat-button color="primary">Actualizar</button>
                         </div>
                     </form>
@@ -39,11 +39,11 @@
                         <input (change)="obtenerImagen($event)" type="file" accept="image/png, image/jpeg">
         
                         <div class="botonera">
-                            <mat-spinner *ngIf="procesando" diameter="30" class="spinner"></mat-spinner>
+                            <mat-spinner color="accent" *ngIf="procesando" diameter="30" class="spinner"></mat-spinner>
                             <button [disabled]="seCambioFoto" type="submit" mat-flat-button color="primary">Actualizar</button>
                         </div>
                     </form>
-                    <mat-progress-bar *ngIf="procesando" style="margin-top: 1em;" mode="determinate" [value]="progresoDeCarga"></mat-progress-bar>
+                    <mat-progress-bar color="accent" *ngIf="procesando" style="margin-top: 1em;" mode="determinate" [value]="progresoDeCarga"></mat-progress-bar>
                 </mat-expansion-panel>
 
     <!-- Contraseña -->
@@ -67,7 +67,7 @@
                         </mat-form-field>
         
                         <div class="botonera">
-                            <mat-spinner *ngIf="procesando" diameter="30" class="spinner"></mat-spinner>
+                            <mat-spinner color="accent" *ngIf="procesando" diameter="30" class="spinner"></mat-spinner>
                             <button type="submit" mat-flat-button color="primary">Actualizar</button>
                         </div>
                     </form>
@@ -95,7 +95,7 @@
         </form>
 
         <div class="botonera">
-            <mat-spinner *ngIf="procesando" diameter="30" class="spinner"></mat-spinner>
+            <mat-spinner color="accent" *ngIf="procesando" diameter="30" class="spinner"></mat-spinner>
             <button (click)="log()" [disabled]="!deAcuerdo" mat-flat-button color="warn">Eliminar cuenta</button>
         </div>
     </mat-expansion-panel>
@@ -105,29 +105,3 @@
         </mat-accordion>
     </mat-card>
 </section>
-
-
-
-<!--mat-expansion-panel hideToggle>
-    <form [formGroup]="formularioDeEliminarCuenta">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Eliminar perfil
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <p>A nosotros nos gusta que estés aquí, pero si ya tomaste la decisión no somos quién para impedirtelo. Pero antes de que te vayas ten en cuenta los siguientes puntos:</p>
-        <ul>
-            <li>Las recetas que creaste seguirán siendo públicas, si quieres que ya no lo sean, antes de borrar tu cuenta elimina las recetas que hayas hecho.</li>
-            <li>Aquellas recetas que no hayas eliminado seguiran mostrando tu nombre de usuario.</li>
-            <li>Los únicos datos que seguiremos almacenando serán las recetas y las fotos de las mismas.</li>
-        </ul>
-        <mat-checkbox color="primary" formControlName="deAcuerdo">
-            Estoy de acuerdo con los puntos anteriores.
-        </mat-checkbox>
-
-        <div class="botonera">
-            <mat-spinner *ngIf="procesando" diameter="30" class="spinner"></mat-spinner>
-            <button (click)="log()" mat-flat-button color="warn">Eliminar cuenta</button>
-        </div>
-    </form>
-</mat-expansion-panel-->

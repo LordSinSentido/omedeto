@@ -33,7 +33,7 @@
                     <input (change)="obtenerImagen($event)" type="file" accept="image/png, image/jpeg">
     
                     <div class="botonera">
-                        <mat-spinner *ngIf="procesando" diameter="30" class="spinner"></mat-spinner>
+                        <mat-spinner color="accent" *ngIf="procesando" diameter="30" class="spinner"></mat-spinner>
                         <button type="submit" mat-flat-button color="primary">Crear</button>
                     </div>
     
@@ -45,6 +45,6 @@
                 </div>
             </div>
         </div>
-        <mat-progress-bar *ngIf="procesando" style="margin-top: 1em;" mode="determinate" [value]="progresoDeCarga"></mat-progress-bar>
+        <mat-progress-bar color="accent" *ngIf="procesando" style="margin-top: 1em;" mode="determinate" [value]="progresoDeCarga"></mat-progress-bar>
     </mat-card>
 </section>

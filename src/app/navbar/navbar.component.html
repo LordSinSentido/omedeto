@@ -1,11 +1,11 @@
-<mat-toolbar>
+<mat-toolbar color="primary">
   <span class="logotipo" [routerLink]="['/']" >
-    <img src="./assets/logotipo.png" alt="Omedeto">
+    <img src="./assets/logotipo.svg" alt="Omedeto">
   </span>
   <span class="espaciador"></span>
 
   <div *ngIf="conexionDelUsuario | async as user; else login">
-    <button mat-stroked-button [matMenuTriggerFor]="menu"> {{user.displayName}} </button>
+    <button mat-flat-button color="accent" [matMenuTriggerFor]="menu"> {{user.displayName}} </button>
 
     <mat-menu #menu="matMenu" xPosition="before">
       <button [routerLink]="['/recipe']" mat-menu-item>
@@ -26,7 +26,7 @@
   </div>
 
   <ng-template #login>
-    <button [routerLink]="['/login']" mat-stroked-button>Iniciar sesión</button>
-    <button [routerLink]="['/register']" class="display: flex;" mat-flat-button color="accent">Registrate</button>
+    <button [routerLink]="['/login']" mat-flat-button color="accent">Iniciar sesión</button>
+    <button [routerLink]="['/register']" mat-flat-button color="accent">Registrate</button>
   </ng-template>
 </mat-toolbar>
