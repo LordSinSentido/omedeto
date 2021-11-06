@@ -65,8 +65,8 @@ export class ProfileComponent implements OnInit {
 
   confirmarBorrado(idReceta: string) {
     let referencia = this.dialogo.open(DeleteRecipeComponent);
-    referencia.afterClosed().subscribe((resultado: boolean) => {
-      if(resultado) {
+    referencia.afterClosed().subscribe((resultado: string) => {
+      if(resultado == 'true') {
         this.ServicioDeAlamacenamiento.eliminarFotoDeReceta(this.datosDelUsuario.uid, idReceta).then(() => {
           this.ServicioDeFirestore.eliminarReceta(idReceta).then(() => {
             this.snackbar.open("¡Listo! Receta eliminada", "", {duration: 3000});
