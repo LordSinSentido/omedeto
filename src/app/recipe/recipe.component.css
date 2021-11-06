@@ -1,7 +1,6 @@
 section{
     display: flex;
     justify-content: center;
-    width: 100vw;
     margin-bottom: 2em;
 }
 
@@ -51,7 +50,7 @@ mat-spinner{
 }
 
 .stepperBotonera > button{
-    margin-left: 0.5em;
+    margin-left: 1em;
 }
 
 @media (max-width: 800px) {
