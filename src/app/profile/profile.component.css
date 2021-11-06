@@ -15,7 +15,7 @@ mat-card{
 }
 
 .fotoDePerfil{
-    border: 0.5em solid rgb(0,87,97);
+    outline: solid 0.3em rgb(0, 87, 97);
     width: 15em;
     height: 15em;
     overflow: hidden;
@@ -44,7 +44,7 @@ mat-card{
 .recetas{
     display: flex;
     justify-content: center;
-    padding: 0em 1em 5em 1em;
+    padding: 0em 1em 2em 1em;
 }
 .noHayRecetas{
     text-align: center;
@@ -73,7 +73,7 @@ mat-card{
 }
 
 .tarjeta:hover{
-    box-shadow: 0em 0em 1em 0.3em rgba(50,50,50,0.4);
+    outline: solid 0.3em rgb(0, 87, 97);
 }
 
 .imagen{

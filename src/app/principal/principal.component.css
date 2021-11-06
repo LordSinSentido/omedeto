@@ -1,8 +1,6 @@
 section{
     display: flex;
     justify-content: center;
-    width: 100vw;
-    
 }
 
 mat-card{
@@ -30,7 +28,7 @@ img{
 }
 
 .tarjeta:hover{
-    box-shadow: 0em 0em 1em 0.3em rgba(50,50,50,0.4);
+    outline: solid 0.3em rgb(0, 87, 97);
 }
 
 .imagen{
