@@ -43,7 +43,7 @@
                 </div>
                 <mat-card-actions>
                     <button mat-stroked-button color="warn" (click)="confirmarBorrado(recetas[i].id)">Eliminar</button>
-                    <button mat-stroked-button>Editar receta</button>
+                    <button mat-stroked-button [routerLink]="['/recipeEdit/', receta.id]" >Editar receta</button>
                 </mat-card-actions>
             </mat-card>
         </div>
