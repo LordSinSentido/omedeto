@@ -27,6 +27,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { RecipeViewComponent } from './recipe-view/recipe-view.component';
 import { DeleteRecipeComponent } from './dialog/delete-recipe/delete-recipe.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
+import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ProfileEditComponent } from './profile-edit/profile-edit.component';
     ProfileComponent,
     RecipeViewComponent,
     DeleteRecipeComponent,
-    ProfileEditComponent
+    ProfileEditComponent,
+    RecipeEditComponent
   ],
   entryComponents: [DeleteRecipeComponent],
   imports: [
