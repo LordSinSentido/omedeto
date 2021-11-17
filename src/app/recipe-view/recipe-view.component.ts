@@ -25,7 +25,15 @@ export class RecipeViewComponent implements OnInit {
       this.ServicioDeFirestore.obtenerReceta(recetaId).subscribe(receta => {
         this.receta.push(receta.payload.data());
         let fecha = this.receta[0].fechaDeActualizacion.toDate();
-        this.fecha = `${fecha.getDate()} de ${this.meses[fecha.getMonth()]} del ${fecha.getFullYear()} a las ${fecha.getHours()}:${fecha.getMinutes()} horas`;
+        let minutos;
+
+        if (fecha.getMinutes() < 10){
+          minutos = `0${fecha.getMinutes()}`;
+        }else{
+          minutos = fecha.getMinutes();
+        }
+
+        this.fecha = `${fecha.getDate()} de ${this.meses[fecha.getMonth()]} del ${fecha.getFullYear()} a las ${fecha.getHours()}:${minutos} horas`;
         
         this.progreso = true;
       })
