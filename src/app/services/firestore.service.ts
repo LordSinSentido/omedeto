@@ -33,4 +33,8 @@ export class FirestoreService {
     return this.firestore.collection('recipes').doc(idReceta).delete();
   }
 
+  actualizarReceta(idReceta: string, receta: any) {
+    return this.firestore.collection('recipes').doc(idReceta).update(receta);
+  }
+
 }
