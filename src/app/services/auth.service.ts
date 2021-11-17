@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { first } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getAuth, updateProfile } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
