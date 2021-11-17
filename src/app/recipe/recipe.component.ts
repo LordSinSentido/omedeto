@@ -36,7 +36,7 @@ export class RecipeComponent implements OnInit {
   usuarioID: any;
   usuarioNombre: any;
   tiempoHoras: string[] = [];
-  tiempoMinutos: string[] = ['00', '15', '30', '45']
+  tiempoMinutos: string[] = ['00', '15', '30', '45'];
   fotoDeReceta: any;
   progresoDeCarga: number = 0;
 
