@@ -10,12 +10,7 @@ export class AuthService {
   constructor(public autenticacion: AngularFireAuth, private redireccionar: Router, private snackbar: MatSnackBar) { }
 
   iniciarSesion(correo: string, contrasenna: string) {
-    this.autenticacion.signInWithEmailAndPassword(correo, contrasenna).then(result => {
-      this.snackbar.open("Hola " + result.user?.displayName, "", {duration: 3000});
-      this.redireccionar.navigate(['/']);
-    }).catch(error => {
-      this.snackbar.open(error.message, "Aceptar", {duration: 7000});
-    });
+    return this.autenticacion.signInWithEmailAndPassword(correo, contrasenna);
   }
 
   registarUsuario(correo: string, contrasenna: string): Promise<any> {
