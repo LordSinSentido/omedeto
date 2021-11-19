@@ -15,6 +15,7 @@
                     <input type="password" matInput placeholder="" formControlName="contrasenna">
                 </mat-form-field>
                 <div class="botonera">
+                    <mat-spinner color="accent" *ngIf="procesando" diameter="30"></mat-spinner>
                     <button mat-flat-button type="submit" color="accent">Acceder</button>
                 </div>
             </form>

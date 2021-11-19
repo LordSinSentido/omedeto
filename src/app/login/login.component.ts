@@ -15,13 +15,26 @@ export class LoginComponent implements OnInit {
     contrasenna: new FormControl('')
   });
 
-  constructor(private ServicioDeAutenticacion: AuthService, private redireccionar: Router, private snackbar: MatSnackBar) { }
+  procesando: boolean = false;
+
+  constructor(private ServicioDeAutenticacion: AuthService, private redireccionar: Router, private snackbar: MatSnackBar) { 
+
+  }
 
   ngOnInit(): void {
   }
 
   iniciarSesion() {
+    this.procesando = true;
+
     const {correo, contrasenna} = this.FormularioDeInicioDeSesion.value;
-    this.ServicioDeAutenticacion.iniciarSesion(correo, contrasenna);
+    this.ServicioDeAutenticacion.iniciarSesion(correo, contrasenna).then(result => {
+      this.snackbar.open("Hola " + result.user?.displayName, "", {duration: 3000});
+      this.procesando = false;
+      this.redireccionar.navigate(['/']);
+    }).catch(error => {
+      this.snackbar.open(error.message, "Aceptar", {duration: 7000});
+      this.procesando = false;
+    });
   }
 }
