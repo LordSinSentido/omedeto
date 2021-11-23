@@ -10,6 +10,7 @@
             <p>{{datosDelUsuario.correo}}</p>
             <button mat-stroked-button color="warn" (click)="cerrarSesion()">Cerrar sesión</button>
             <button mat-stroked-button [routerLink]="['/profileEdit']">Editar perfil</button>
+            <button *ngIf="datosDelUsuario.tipo == 'administrador'" mat-stroked-button [routerLink]="['/admin']">Panel de control</button>
         </div>
     </div>
 </section>

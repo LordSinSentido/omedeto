@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -23,7 +22,8 @@ export class ProfileComponent implements OnInit {
     uid: '',
     nombreDelUsuario: '',
     correo: '',
-    fotoUrl: ''
+    fotoUrl: '',
+    tipo: ''
   };
 
   recetas: any[] = [];
@@ -33,11 +33,18 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.obtenerRecetas();
+    
+  }
+
+  obtenerRecetas() {
     this.conexionDelUsuario.subscribe(usuario => {
       this.datosDelUsuario.uid = usuario.uid;
       this.datosDelUsuario.nombreDelUsuario = usuario.displayName;
       this.datosDelUsuario.correo = usuario.email;
       this.datosDelUsuario.fotoUrl = usuario.photoURL;
+
+      this.comprobarAdmin();
 
       this.ServicioDeFirestore.obtenerMisRecetas(this.datosDelUsuario.uid).subscribe(datos => {      
         this.recetas = [];
@@ -51,7 +58,18 @@ export class ProfileComponent implements OnInit {
         
         this.procesando = false;
       });
-    })
+
+      
+    });
+  }
+
+  comprobarAdmin() {
+    this.ServicioDeFirestore.obtenerTipoDeUsuario(this.datosDelUsuario.uid).subscribe(datos => {
+      let usuario: any = [];
+      usuario.push(datos.data());
+      this.datosDelUsuario.tipo = usuario[0].tipo;
+      console.log(this.datosDelUsuario.tipo);
+    });
   }
 
   cerrarSesion() {
