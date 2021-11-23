@@ -11,6 +11,7 @@ export class RecipeViewComponent implements OnInit {
   recetaId: string | null = '';
   progreso: boolean = false;
   receta: any[] = [];
+  fotoUrl = '';
 
   meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
   fecha: string = '';
@@ -19,11 +20,13 @@ export class RecipeViewComponent implements OnInit {
   constructor(private ServicioDeFirestore: FirestoreService, private idDeLaReceta: ActivatedRoute) { }
 
   ngOnInit(): void {
-    let recetaId = this.idDeLaReceta.snapshot.paramMap.get('id');
+    this.recetaId = this.idDeLaReceta.snapshot.paramMap.get('id');
 
-    if(recetaId) {
-      this.ServicioDeFirestore.obtenerReceta(recetaId).subscribe(receta => {
+    if(this.recetaId) {
+      this.ServicioDeFirestore.obtenerReceta(this.recetaId).subscribe(receta => {
         this.receta.push(receta.payload.data());
+        this.comprobarAdmin();
+
         let fecha = this.receta[0].fechaDeActualizacion.toDate();
         let minutos;
 
@@ -38,7 +41,16 @@ export class RecipeViewComponent implements OnInit {
         this.progreso = true;
       })
 
-      
+    }
+  }
+
+  comprobarAdmin() {
+    if(this.recetaId) {
+      this.ServicioDeFirestore.obtenerTipoDeUsuario(this.receta[0].autorID).subscribe(datos => {
+        let usuario: any = [];
+        usuario.push(datos.data());
+        this.fotoUrl = usuario[0].fotoUrl;
+      });
     }
   }
 }
