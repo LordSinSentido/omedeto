@@ -96,7 +96,7 @@
 
         <div class="botonera">
             <mat-spinner color="accent" *ngIf="procesando" diameter="30" class="spinner"></mat-spinner>
-            <button (click)="log()" [disabled]="!deAcuerdo" mat-flat-button color="warn">Eliminar cuenta</button>
+            <button (click)="eliminarCuenta()" [disabled]="!deAcuerdo" mat-flat-button color="warn">Eliminar cuenta</button>
         </div>
     </mat-expansion-panel>
                 

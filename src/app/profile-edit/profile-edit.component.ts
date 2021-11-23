@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { FirestoreService } from '../services/firestore.service';
 import { StorageService } from '../services/storage.service';
 import { AuthService } from './../services/auth.service';
 
@@ -26,7 +27,7 @@ export class ProfileEditComponent implements OnInit {
   formularioEliminar: FormGroup;
   deAcuerdo: boolean = false;
 
-  constructor(private ServicioDeAutenticacion: AuthService, private ServicioDeAlmacenamiento: StorageService, private formulario: FormBuilder, private redireccionar: Router, private snackbar: MatSnackBar) {
+  constructor(private ServicioDeBase: FirestoreService, private ServicioDeAutenticacion: AuthService, private ServicioDeAlmacenamiento: StorageService, private formulario: FormBuilder, private redireccionar: Router, private snackbar: MatSnackBar) {
     this.formularioNombre = this.formulario.group({
       nombreDelUsuario: ['', Validators.required]
     });
@@ -112,8 +113,23 @@ export class ProfileEditComponent implements OnInit {
     
   }
 
-  log() {
+  eliminarCuenta() {
+    this.procesando = true;
 
+    const usuario = this.ServicioDeAutenticacion.obtenerUsuario();
+
+    if(usuario) {
+      this.ServicioDeBase.eliminarUsuario(usuario.uid).then(() => {
+        this.ServicioDeAutenticacion.eliminarUsuario();
+        this.snackbar.open("¡Listo! Tu usuario ha sido eliminado", "", {duration: 3000});
+        this.redireccionar.navigate(['/principal']);
+
+      }).catch(error => {
+        this.snackbar.open("Selecciona una foto para subir", "Aceptar", {duration: 7000});
+        this.procesando = false;
+      });
+    }
+    
   }
 
 }
