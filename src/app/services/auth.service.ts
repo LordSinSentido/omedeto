@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { getAuth, updateProfile } from '@angular/fire/auth';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { getAuth, updateProfile, deleteUser } from '@angular/fire/auth';
+
 
 @Injectable()
 export class AuthService {
   
-  constructor(public autenticacion: AngularFireAuth, private redireccionar: Router, private snackbar: MatSnackBar) { }
+  constructor(public autenticacion: AngularFireAuth) { }
 
   iniciarSesion(correo: string, contrasenna: string) {
     return this.autenticacion.signInWithEmailAndPassword(correo, contrasenna);
@@ -47,5 +46,18 @@ export class AuthService {
 
   cerrarSesion(): Promise<any> {
     return this.autenticacion.signOut();
+  }
+
+  eliminarUsuario() {
+    const usuario = this.obtenerUsuario();
+
+    if(usuario) {
+      deleteUser(usuario).then(() => {
+        return true;
+      }).catch((error) => {
+        return false;
+      });
+    }
+      return true;
   }
 }
