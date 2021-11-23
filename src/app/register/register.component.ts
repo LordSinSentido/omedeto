@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { FirestoreService } from '../services/firestore.service';
 import { StorageService } from '../services/storage.service';
 import { AuthService } from './../services/auth.service';
 
@@ -12,17 +13,19 @@ import { AuthService } from './../services/auth.service';
 })
 export class RegisterComponent implements OnInit {
   formularioDeRegistro: FormGroup;
+
   procesando: boolean = false;
   fotoDePerfil: any;
   progresoDeCarga: number = 0;
 
-  constructor(private ServicioDeAutenticacion: AuthService, private ServicioDeAlmacenamiento: StorageService, private datosDelUsuario: FormBuilder, private redireccionar: Router, private snackbar: MatSnackBar) {
+  constructor(private ServicioDeAutenticacion: AuthService, private ServicioDeAlmacenamiento: StorageService, private ServicioDeBase: FirestoreService, private datosDelUsuario: FormBuilder, private redireccionar: Router, private snackbar: MatSnackBar) {
     this.formularioDeRegistro = this.datosDelUsuario.group({
       nombreDelUsuario: ['', Validators.required],
       correo: ['', [Validators.email, Validators.required]],
       contrasenna: ['', Validators.required],
       confirmacionContrasenna: ['', Validators.required],
-      fotoUrl: ['']
+      fotoUrl: [''],
+      tipo: ['usuario']
     });
    }
 
@@ -65,10 +68,7 @@ export class RegisterComponent implements OnInit {
               photoURL: this.formularioDeRegistro.value.fotoUrl
             });
 
-            this.snackbar.open("¡Listo!, ahora puedes iniciar sesión", "Aceptar", {duration: 7000});
-            this.redireccionar.navigate(['/login']);
-            this.ServicioDeAutenticacion.cerrarSesion();
-            this.procesando = false;
+            this.agregarAFirebase(usuarioCreado.user.uid);
            });
         }
       );
@@ -76,5 +76,27 @@ export class RegisterComponent implements OnInit {
       this.procesando = false;
       this.snackbar.open(error.message, "Aceptar", {duration: 7000});
     });
+  }
+
+  agregarAFirebase(uid: string) {
+    let usuario = {
+      uid: uid,
+      nombreDelUsuario: this.formularioDeRegistro.value.nombreDelUsuario,
+      correo: this.formularioDeRegistro.value.correo,
+      tipo: this.formularioDeRegistro.value.tipo,
+      fotoUrl: this.formularioDeRegistro.value.fotoUrl
+    }
+
+    this.ServicioDeBase.agregarUsuario(uid, usuario).then(() => {
+      console.log("Agregado");
+      
+    }).catch(error => {
+      console.log(error.message);
+    });
+
+    this.snackbar.open("¡Listo!, ahora puedes iniciar sesión", "Aceptar", {duration: 7000});
+    this.redireccionar.navigate(['/login']);
+    this.ServicioDeAutenticacion.cerrarSesion();
+    this.procesando = false;
   }
 }
