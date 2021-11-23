@@ -1,0 +1,47 @@
+section{
+    display: flex;
+    justify-content: center;
+}
+
+mat-card{
+    width: 100%;
+    max-width: 800px;
+    margin: 2em 1em;
+}
+
+mat-icon{
+    overflow: hidden;
+}
+
+mat-icon > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.elemento {
+    display: grid;
+    grid-template-columns: auto min-content;
+}
+
+.elementoDescripcion {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.elementoDescripcion > p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.elementoBotonera > button {
+    margin-left: 1em;
+}
+
+@media (max-width: 800px) {
+    mat-card{
+        grid-template-columns: 1fr;
+    }
+}

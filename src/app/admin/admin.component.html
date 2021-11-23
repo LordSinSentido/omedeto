@@ -1,0 +1,67 @@
+<mat-progress-bar color="warn" *ngIf="procesandoUsuarios && procesandoRecetas" mode="indeterminate"></mat-progress-bar>
+
+<section>
+    <mat-card class="contenedor">
+        <h1>Panel de control</h1>
+        <p>Un gran poder conlleva una gran responsabilidad, a continuación se muestran todos los usuarios registrados y todas las recetas que sean publicado en omedeto, desde aquí podrás administrarlas. Cualquier cambio que realices se verá aplicado inmediatamente, así que ten cuidado y realiza las cosas estando 100 % seguro.</p>
+        <mat-tab-group *ngIf="!procesandoRecetas">
+            
+            <mat-tab label="Recetas">
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *ngFor="let receta of recetas; let i = index">
+                        <mat-icon mat-list-icon>note</mat-icon>
+                        <div mat-line>
+                            <div class="elemento">
+                                <div class="elementoDescripcion">
+                                    <p><b>{{receta.nombre}}</b></p>
+                                    <p>Por {{receta.autorNombre}}</p>
+                                </div>
+    
+                                <div class="elementoBotonera">
+                                    <button mat-stroked-button color="warn" (click)="confirmarBorrado(receta.autorID, receta.id)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                    <button mat-stroked-button [routerLink]="['/recipeView/', receta.id]" >
+                                        <mat-icon>visibility</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-list-item>
+                </mat-list>  
+            </mat-tab>
+
+
+
+
+            <mat-tab label="Usuarios">
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *ngFor="let usuario of usuarios; let i = index">
+                        <mat-icon mat-list-icon>
+                            <img src="{{usuario.fotoUrl}}" alt="Foto de {{usuario.nombreDelUsuario}}">
+                        </mat-icon>
+                        <div mat-line>
+                            <div class="elemento">
+                                <div class="elementoDescripcion">
+                                    <p><b>{{usuario.nombreDelUsuario}} ({{usuario.correo}})</b></p>
+                                    <p>Rol: {{usuario.tipo}}</p>
+                                </div>
+    
+                                <div class="elementoBotonera" *ngIf="usuario.uid != datosDelUsuario.uid">
+                                    <button mat-stroked-button *ngIf="usuario.tipo == 'usuario'" (click)="hacerAdmin(usuario.uid, i)">
+                                        <mat-icon>add</mat-icon>
+                                    </button>
+                                    <button mat-stroked-button *ngIf="usuario.tipo == 'administrador'" (click)="hacerUsuario(usuario.uid, i)">
+                                        <mat-icon>remove</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-list-item>
+                </mat-list>  
+            </mat-tab>
+
+        </mat-tab-group>
+
+    </mat-card>
+</section>
