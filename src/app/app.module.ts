@@ -28,6 +28,7 @@ import { RecipeViewComponent } from './recipe-view/recipe-view.component';
 import { DeleteRecipeComponent } from './dialog/delete-recipe/delete-recipe.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
     RecipeViewComponent,
     DeleteRecipeComponent,
     ProfileEditComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    AdminComponent
   ],
   entryComponents: [DeleteRecipeComponent],
   imports: [
